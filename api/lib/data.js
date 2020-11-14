@@ -28,6 +28,7 @@ const initPool = async () => {
 const getTodos = async () => {
   await initPool()
   const query = `SELECT TodoId, TodoText, completed FROM Todos`
+  console.log(query)
 
   return await pool.query(query)
 }
@@ -46,7 +47,16 @@ const getTodo = async (todoId) => {
   return await pool.query(query)
 }
 
+const addTodo = async (todo) => {
+  console.log(todo)
+  if (!todo.TodoText)
+    return { status: 'error', statusCode: 400, message: 'TodoText is missing' }
+
+  return { status: 'success', statusCode: 200, ...todo }
+}
+
 module.exports = {
   getTodos,
   getTodo,
+  addTodo,
 }

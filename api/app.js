@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express'),
-  { getTodos, getTodo } = require('./lib/fetchData')
+  { getTodos, getTodo, addTodo } = require('./lib/data')
 
 const lport = process.env.LPORT || 3000
 
@@ -10,7 +10,7 @@ app.use(express.json())
 app
   .route('/todos')
   .get(async (req, res) => res.json(await getTodos()))
-  .post((req, res) => res.sendStatus(501))
+  .post(async (req, res) => res.json(await addTodo(req.body)))
 
 app
   .route('/todos/:id')
