@@ -8,12 +8,12 @@ const app = express()
 app.use(express.json())
 
 app
-  .route('/todos')
+  .route('/api/tutorial/todos')
   .get(async (req, res) => res.json(await getTodos()))
   .post(async (req, res) => res.json(await addTodo(req.body)))
 
 app
-  .route('/todos/:id')
+  .route('/api/tutorial/todos/:id')
   .get(async (req, res) => res.json(await getTodo(req.params.id)))
   .put((req, res) => res.sendStatus(501))
   .delete((req, res) => res.sendStatus(501))
