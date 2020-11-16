@@ -47,8 +47,10 @@ const getTodo = async (todoId) => {
   return await pool.query(query)
 }
 
-const addTodo = async (todo) => {
-  console.log(todo)
+const addTodo = async (req) => {
+  console.log(req.cookies)
+  const todo = req.body
+  console.log('Todo', todo)
   if (!todo.TodoText)
     return { status: 'error', statusCode: 400, message: 'TodoText is missing' }
 
